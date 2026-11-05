@@ -1,0 +1,22 @@
+# discoverpmgbali.com: Google Ads landing pages for PMG Bali. There is no home page.
+DirectoryIndex index.html
+Options -Indexes
+
+RewriteEngine On
+
+# Hostinger's Git deploy keeps a .git folder here
+RewriteRule (^|/)\.git(/|$) - [R=404,L]
+
+# One hostname only
+RewriteCond %{HTTP_HOST} ^www\.discoverpmgbali\.com$ [NC]
+RewriteRule ^(.*)$ https://discoverpmgbali.com/$1 [R=301,L]
+
+# Root goes to The Bandha. The query string is kept, so a gclid survives.
+RewriteRule ^$ /the-bandha/ [R=301,L]
+
+# Pages can be changed and go live at once
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
