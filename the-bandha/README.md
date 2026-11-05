@@ -1,8 +1,10 @@
 # The Bandha Hotel & Suites: Book Direct landing page
 
-A single-page, paid-social landing page for [The Bandha Hotel & Suites](https://thebandha.com) in Legian, Bali. Its job is to turn ad traffic into direct bookings: every call to action sends visitors to the PMG booking engine with UTM tags attached.
+A single-page Google Ads landing page for [The Bandha Hotel & Suites](https://thebandha.com) in Legian, Bali. Its job is to turn ad traffic into direct bookings: every call to action sends visitors to the SynXis booking engine.
 
-**Live preview:** https://moveaheadmedia.github.io/pmg-hotels/the-bandha/
+**Live page:** https://discoverpmgbali.com/the-bandha/
+
+**Preview:** https://moveaheadmedia.github.io/pmg-hotels/the-bandha/
 
 Built by Move Ahead Media. Contact: Josh Tinker (josh.tinker@moveaheadmedia.com.au).
 
@@ -12,7 +14,7 @@ Built by Move Ahead Media. Contact: Josh Tinker (josh.tinker@moveaheadmedia.com.
 |---|---|
 | `index.html` | The whole page in one file. Plain HTML, CSS and vanilla JS. No build step, no dependencies. |
 | `favicon.ico`, `favicon.png` | The Bandha gold crest favicon. |
-| `DEVELOPER-HANDOFF.md` | Implementation notes, settings, hosting options and the pre-launch checklist. |
+| `DEVELOPER-HANDOFF.md` | Implementation notes, settings and the pre-launch checklist. |
 | `the-bandha-brand-ci.md` | Brand CI: logo, colour tokens, typography, UI and voice rules. |
 
 ## Running it locally
@@ -23,21 +25,19 @@ The page loads Google Fonts (Cinzel and Open Sans), a Google Maps embed and imag
 
 ## Configuring the page
 
-Search `index.html` for `PAGE SETTINGS`. The settings block controls the booking URL, UTM tags, the IDR to AUD rate shown under prices, and the offer end date for the countdown:
+Search `index.html` for `PAGE SETTINGS`. The settings block controls the IDR to AUD rate shown under prices and the offer end date for the countdown:
 
 ```js
-var BOOKING_URL='https://reservation.pmgbali.com/';
-var UTM={utm_source:'MAM',utm_medium:'social',utm_campaign:'the_bandha'};
 var AUD_PER_IDR=12400;   // approx. AUD shown under every IDR price
 var OFFER_END='';        // e.g. '2026-10-31T23:59:00+08:00'; empty = countdown hidden
 ```
 
+Booking links are plain links to the SynXis engine (chain `7097`, hotel `101578`), and the hero widget is a GET form to it. Each offer card links to that offer's own rate (`rate=...`), copied from the hotel's website. Do not add UTM tags to them: see Tracking in the [root README](../README.md).
+
 ## Deployment
 
-The `main` branch of the PMG Hotels repo is published automatically with GitHub Pages from the repo root, so this folder is served at `/the-bandha/`. Push to `main` and the live preview updates within about a minute.
-
-For production, see the implementation options in `DEVELOPER-HANDOFF.md`: either host the file as-is at a clean URL on thebandha.com, or rebuild it as a page in the existing site stack.
+Pushing to `main` puts this page live automatically. See "Making a change" in the [root README](../README.md).
 
 ## Before launch
 
-Work through the checklist in `DEVELOPER-HANDOFF.md`. The main items are tracking (GA4, Meta pixel, cross-domain to the booking engine), self-hosting images, replacing placeholder reviews, confirming prices and offers with the hotel, and cross-browser QA.
+Work through the checklist in `DEVELOPER-HANDOFF.md`. The main open items are replacing placeholder reviews, confirming prices and offers with the hotel, self-hosting images, and cross-browser QA.

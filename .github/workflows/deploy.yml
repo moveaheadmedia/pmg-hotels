@@ -1,0 +1,55 @@
+name: Deploy to discoverpmgbali.com
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time, so pushes go live in order.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check the pages and build the public copy
+        run: |
+          deploy/build.sh "$RUNNER_TEMP/site"
+          echo "$GITHUB_SHA" > "$RUNNER_TEMP/site/deployed.txt"
+
+      - name: Publish to the live branch
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/live" origin/live
+          cd "$RUNNER_TEMP/live"
+          git rm -rq .
+          cp -a "$RUNNER_TEMP/site/." .
+          git add -A
+          # Nothing to commit when a failed run is re-run.
+          if ! git diff --cached --quiet; then
+            git -c user.name="github-actions[bot]" \
+                -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                commit -q -m "Deploy $GITHUB_SHA"
+            git push origin HEAD:live
+          fi
+
+      - name: Tell Hostinger to pull it
+        env:
+          HOSTINGER_DEPLOY_WEBHOOK: ${{ secrets.HOSTINGER_DEPLOY_WEBHOOK }}
+        # The webhook answers 400 to an empty POST: it expects the JSON body of a Git push.
+        run: |
+          curl -fsS -X POST --max-time 60 --retry 3 --retry-all-errors \
+            -H 'Content-Type: application/json' -d '{"ref":"refs/heads/live"}' \
+            "$HOSTINGER_DEPLOY_WEBHOOK" -o /dev/null
+
+      - name: Confirm the live site matches
+        run: deploy/verify.sh "$RUNNER_TEMP/site"

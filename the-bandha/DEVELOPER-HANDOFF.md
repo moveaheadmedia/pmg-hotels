@@ -1,6 +1,6 @@
 # The Bandha: Book Direct Landing Page (developer handoff)
 
-**Goal:** get more direct bookings. Paid social traffic lands here, and every CTA sends visitors to the PMG booking engine with UTM tags.
+**Goal:** get more direct bookings. Google Ads traffic lands here, and every CTA sends visitors to the SynXis booking engine.
 **Contact:** Josh Tinker, Move Ahead Media (josh.tinker@moveaheadmedia.com.au)
 
 ## Files
@@ -17,29 +17,27 @@
   - Images hotlinked from `cms.thebandha.com/uploads`
 - **Settings block** (search the file for `PAGE SETTINGS`):
   ```js
-  var BOOKING_URL='https://reservation.pmgbali.com/';
-  var UTM={utm_source:'MAM',utm_medium:'social',utm_campaign:'the_bandha'};
   var AUD_PER_IDR=12400;   // approx. AUD shown under every IDR price
   var OFFER_END='';        // e.g. '2026-10-31T23:59:00+08:00'; empty = countdown hidden
   ```
-- **Booking widget:** builds `BOOKING_URL?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&rooms=1&adults=N&children=N&utm_...`. The booking engine accepts these parameters (tested).
-- **All `[data-book]` links** get `BOOKING_URL + UTM` from JS. Static hrefs with UTMs are also hard-coded as a fallback for when JS doesn't run.
+- **Booking widget:** a GET form to `https://be.synxis.com/` with the same fields as the form on the hotel's website: `chain`, `hotel`, `arrive`, `depart`, `adult`, `child`, `rooms`. With no dates picked it searches from today.
+- **Book Now links:** plain links to SynXis, the same as the hotel's website. Offer cards link to their own rate (`rate=...`, taken from the offer's `Book_Now_Link` on the hotel's website). Early Bird gets its arrival date from JS (`data-days-ahead`), because that rate needs an arrival 30+ days out.
+- **Tracking:** GTM carries the ad click to SynXis (`_gl` and `_mam`). No UTM tags on booking links: see the root README.
 
-## Implementation options (pick one)
-1. **Fastest:** host the file as-is at a clean URL, e.g. `thebandha.com/book-direct` or `offers.thebandha.com`.
-2. **Native:** rebuild it as a page in the existing thebandha.com stack (Next.js front end, Strapi-style CMS at cms.thebandha.com) using the same markup and tokens. Offers and prices can then come from the CMS instead of being hard-coded.
+## Hosting
+
+Live on https://discoverpmgbali.com/, deployed automatically from `main`. See "Making a change" in the root README.
 
 ## Must do before launch
-- [ ] **Booking URL:** decide with the client whether to switch to `https://reservation.pmgbali.com/the-bandha`. The root URL also lists sister hotels, and The Magani appeared above The Bandha in testing.
-- [ ] **Tracking:**
-  - Add GA4/GTM and the Meta pixel.
-  - Set up cross-domain measurement to `reservation.pmgbali.com`.
-  - The booking engine rewrites its URL on load (it drops the `utm_` parameters and adds `mam_cid`). Make a test booking and confirm the session is attributed to MAM / social / the_bandha.
+- [x] **Booking engine:** moved to SynXis.
+- [x] **Tracking:** GTM installed; the ad click reaches SynXis.
+- [ ] **Tracking test:** make a test booking and confirm the session is attributed to the right campaign.
+- [ ] **GA4:** add `discoverpmgbali.com` to the cross-domain list of the hotel's GA4 stream.
 - [ ] **Images:**
   - Download them from the CMS and self-host them, as WebP in responsive sizes with `srcset`, so the page keeps working if CMS files are renamed.
   - The hero image is a large PNG. Compress it.
 - [ ] **Fonts:** Trajan Pro is the brand heading font. If the client holds a web licence, self-host it; the CSS already lists it first. Otherwise Cinzel is the fallback.
-- [ ] **Head tags:** add Open Graph and Twitter tags (it's a social campaign), a favicon, and a canonical URL. Use `noindex` if it's paid-traffic only.
+- [x] **Head tags:** `noindex` added (paid traffic only).
 - [ ] **Placeholder content to replace:**
   - [ ] 3 guest review quotes (search for `Verified guest review`). Use real, attributed reviews only.
   - [ ] `OFFER_END` for the 10.10 countdown, using the real end date from the hotel.
@@ -49,7 +47,7 @@
 - [ ] **QA:**
   - [ ] Test on iOS Safari and Android Chrome, especially the date inputs.
   - [ ] Run Lighthouse (performance and accessibility).
-  - [ ] Check every CTA opens the booking engine with the UTM tags.
+  - [ ] Check every CTA opens the booking engine on the right hotel and rate.
   - [ ] Check the gallery lightbox (Esc and arrow keys), the in-page nav and the mobile sticky book bar.
 
 ## Page structure (top to bottom)
