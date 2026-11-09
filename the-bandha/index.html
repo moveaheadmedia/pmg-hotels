@@ -91,7 +91,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
-[id]{scroll-margin-top:90px}
+[id]{scroll-margin-top:106px}
 body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.7;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -126,13 +126,13 @@ h3{font-size:clamp(18px,1.6vw,21px);color:var(--olive)}
 
 /* Header */
 .header{position:sticky;top:0;z-index:50;background:var(--olive-deep);border-bottom:1px solid rgba(255,255,255,.08)}
-.header .wrap{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px}
-.logo img{height:72px;width:auto;margin:-6px 0}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;gap:20px}
+.logo img{height:88px;width:auto;margin:-6px 0}
 .nav{display:flex;gap:30px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
 .nav a{color:#E9E2D0;text-decoration:none;opacity:.9}
 .nav a:hover{opacity:1;color:#fff}
 .header .btn{padding:13px 24px;font-size:12px}
-@media(max-width:900px){.nav{display:none}.logo img{height:60px}}
+@media(max-width:900px){.nav{display:none}.logo img{height:70px}}
 
 /* Hero */
 .hero{position:relative;min-height:min(88vh,820px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--olive-deep)}
@@ -187,8 +187,8 @@ section{padding:clamp(64px,9vw,120px) 0}
 .offers h2{color:#fff}
 .offers .eyebrow{color:#E2C98F}
 .offers .lead{color:#D9D2BF}
-.offers__feature{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:52px 0 28px}
-@media(max-width:900px){.offers__feature{grid-template-columns:1fr}}
+.offers__feature{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:52px 0 28px}
+@media(max-width:1000px){.offers__feature{grid-template-columns:1fr}}
 .offer-hero{position:relative;min-height:440px;border-radius:var(--radius);overflow:hidden;display:flex;align-items:flex-end;color:#fff}
 .offer-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
 .offer-hero:hover img{transform:scale(1.04)}
@@ -314,7 +314,7 @@ details p{margin:14px 0 0;color:var(--muted)}
 .footer p{margin:0 0 6px}
 .footer a{text-decoration:none}
 .footer a:hover{color:#fff}
-.footer .logo img{height:70px;margin-bottom:18px}
+.footer .logo img{height:90px;margin-bottom:18px}
 .footer__base{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 
@@ -379,7 +379,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- PROMO RIBBON -->
 <div class="ribbon">
-  <strong>10.10 Time to Travel:</strong> save up to 25% when you book direct.<span class="cdr" data-cd-text></span>
+  <strong>11.11 Cocktail O'Clock:</strong> enjoy two complimentary cocktails when you book direct.<span class="cdr" data-cd-text></span>
   <a href="https://be.synxis.com/?adult=2&amp;arrive=today&amp;chain=7097&amp;child=0&amp;currency=IDR&amp;hotel=101578&amp;level=hotel&amp;locale=en-US&amp;productcurrency=IDR&amp;rooms=1" data-book>Book now</a>
 </div>
 
@@ -502,14 +502,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="offers__feature">
       <article class="offer-hero">
-        <img src="https://cms.thebandha.com//uploads/The_Bandha_Affiliate_Banner_10_10_Time_To_Travel_1920_x_1280_51edd09f3d.jpg" alt="10.10 Time to Travel offer">
+        <img src="https://cms.thebandha.com/uploads/The_Bandha_Hotel_and_Suites_11_11_Cocktail_O_Clock_f8e63f491a.png" alt="11.11 Cocktail O'Clock offer">
         <div class="offer-hero__body">
-          <span class="tag">Up to 25% off</span>
-          <h3>10.10 Time to Travel</h3>
+          <span class="tag">11.11 Special</span>
+          <h3>11.11 Cocktail O'Clock</h3>
           <div class="cd" data-cd aria-label="Offer ends in"><div><b data-d>0</b><small>Days</small></div><div><b data-h>0</b><small>Hrs</small></div><div><b data-m>0</b><small>Min</small></div><div><b data-s>0</b><small>Sec</small></div></div>
-          <p>Take a break from the everyday and make time for an island escape. Our biggest saving of the season.</p>
-          <div class="price"><small>From</small><b>IDR 2,599,999</b></div>
+          <p>Make your Bali getaway even more enjoyable with our exclusive 11.11 offer and receive two complimentary cocktails during your stay.</p>
+          <div class="price"><small>From</small><b>IDR 1,599,000</b></div>
           <a class="btn" href="https://be.synxis.com/?adult=2&amp;arrive=today&amp;chain=7097&amp;child=0&amp;currency=IDR&amp;hotel=101578&amp;level=hotel&amp;locale=en-US&amp;productcurrency=IDR&amp;rooms=1" data-book>Book Now</a>
+        </div>
+      </article>
+      <article class="offer-hero">
+        <img src="https://cms.thebandha.com/uploads/The_Bandha_Hotel_and_Suites_Unwind_and_Unveil_faaaa1f881.png" alt="Unwind and Unveil wellness getaway">
+        <div class="offer-hero__body">
+          <span class="tag tag--gold">Wellness getaway</span>
+          <h3>Unwind &amp; Unveil</h3>
+          <p>Take a break from the everyday with a relaxing Bali getaway that combines wellness and self-discovery.</p>
+          <div class="price"><small>From</small><b>IDR 3,299,000</b></div>
+          <a class="btn" href="https://be.synxis.com/?adult=2&amp;arrive=today&amp;chain=7097&amp;child=0&amp;currency=IDR&amp;night=2&amp;hotel=101578&amp;level=hotel&amp;locale=en-US&amp;productcurrency=IDR&amp;rate=UNRB%2CUNRO&amp;rooms=1" data-book>Book Now</a>
         </div>
       </article>
       <article class="offer-hero">
@@ -891,7 +901,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                  links: GTM carries the ad click across (_gl and _mam), and a
                  UTM here would overwrite it.
    AUD_PER_IDR : 1 AUD = this many IDR (≈12,400 at early Oct 2026).
-   OFFER_END   : 10.10 end date/time, e.g. "2026-10-31T23:59:00+08:00".
+   OFFER_END   : 11.11 end date/time, e.g. "2026-11-30T23:59:00+08:00".
                  Leave "" to hide the countdown.
 ================================================================= */
 var AUD_PER_IDR=12400;
@@ -953,7 +963,7 @@ document.addEventListener('click',function(e){
   var id=a.getAttribute('href').slice(1);
   var el=id?document.getElementById(id):document.body;if(!el)return;
   e.preventDefault();
-  var y=id==='top'?0:el.getBoundingClientRect().top+window.pageYOffset-80;
+  var y=id==='top'?0:el.getBoundingClientRect().top+window.pageYOffset-96;
   window.scrollTo({top:y,behavior:'smooth'});
 });
 </script>
